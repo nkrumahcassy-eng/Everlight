@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Earnings</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      padding: 25px 20px;
+    }
+
+    .back {
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .balance {
+      background: white;
+      padding: 25px;
+      margin-top: 25px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .balance h2 {
+      margin-bottom: 8px;
+    }
+
+    #amount {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .info {
+      color: #666;
+    }
+
+    .transaction {
+      background: white;
+      padding: 18px;
+      margin-top: 15px;
+      border-radius: 14px;
+    }
+
+    .transaction p {
+      color: #666;
+    }
+
+    .withdraw {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Everlight</h1>
+    <p>My Earnings</p>
+  </header>
+
+  <div class="container">
+
+    <a class="back" href="dashboard.html">
+      ← Back to Dashboard
+    </a>
+
+    <div class="balance">
+
+      <h2>Available Balance</h2>
+
+      <div id="amount">
+        GHS 0.00
+      </div>
+
+      <p class="info">
+        This is a prototype earnings wallet.
+      </p>
+
+      <button class="withdraw" onclick="withdraw()">
+        Withdraw
+      </button>
+
+    </div>
+
+    <h2>Recent Earnings</h2>
+
+    <div id="transactions">
+
+      <p class="info">
+        No earnings yet. Complete work to start earning.
+      </p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    let earnings =
+      Number(localStorage.getItem("everlightEarnings")) || 0;
+
+    document.getElementById("amount").textContent =
+      "GHS " + earnings.toFixed(2);
+
+
+    function withdraw() {
+
+      if (earnings <= 0) {
+
+        alert(
+          "You don't have any available earnings yet."
+        );
+
+        return;
+      }
+
+      alert(
+        "Withdrawals will be connected to a real payment provider later."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>

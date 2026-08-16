@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Sign Up</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      padding: 30px 20px;
+    }
+
+    .signup-box {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+    }
+
+    #message {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .login-link a {
+      color: #111827;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Everlight</h1>
+    <p>Learn. Work. Earn.</p>
+  </header>
+
+  <div class="container">
+
+    <div class="signup-box">
+
+      <h2>Create Your Account 🚀</h2>
+
+      <p>
+        Join Everlight and start building your future.
+      </p>
+
+      <form onsubmit="createAccount(event)">
+
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your name"
+          required
+        >
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Create a password"
+          required
+        >
+
+        <button type="submit">
+          Create Account
+        </button>
+
+      </form>
+
+      <p id="message"></p>
+
+      <div class="login-link">
+        Already have an account?
+        <a href="login.html">Log in</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    function createAccount(event) {
+
+      event.preventDefault();
+
+      const name =
+        document.getElementById("name").value;
+
+      const email =
+        document.getElementById("email").value;
+
+      const password =
+        document.getElementById("password").value;
+
+      const user = {
+        name: name,
+        email: email,
+        password: password
+      };
+
+      localStorage.setItem(
+        "everlightUser",
+        JSON.stringify(user)
+      );
+
+      document.getElementById("message").textContent =
+        "🎉 Account created successfully!";
+
+    }
+
+  </script>
+
+</body>
+</html>

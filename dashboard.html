@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Dashboard</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      padding: 25px 20px;
+    }
+
+    .welcome {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 14px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .card p {
+      color: #666;
+    }
+
+    .card button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 15px;
+    }
+
+    .logout {
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #555;
+      color: white;
+      font-size: 16px;
+    }
+
+    .locked {
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Everlight</h1>
+    <p>Learn. Work. Earn.</p>
+  </header>
+
+  <div class="container">
+
+    <div class="welcome">
+      <h2 id="welcomeMessage">Welcome 👋</h2>
+
+      <p>
+        Keep learning, build your skills,
+        create your portfolio and discover opportunities.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <h3>📚 Learn</h3>
+      <p>Continue learning new skills.</p>
+
+      <a href="courses.html">
+        <button>View Courses</button>
+      </a>
+    </div>
+
+
+    <div class="card">
+      <h3>🛠️ Portfolio</h3>
+      <p>Show employers the projects you've created.</p>
+
+      <a href="portfolio.html">
+        <button>My Portfolio</button>
+      </a>
+    </div>
+
+
+    <div class="card">
+      <h3>💼 Jobs</h3>
+      <p>Find opportunities that match your skills.</p>
+
+      <a href="jobs.html">
+        <button>Find Jobs</button>
+      </a>
+    </div>
+
+
+    <div class="card">
+      <h3>📝 Applications</h3>
+      <p>Check the jobs you've applied for.</p>
+
+      <a href="applications.html">
+        <button>My Applications</button>
+      </a>
+    </div>
+
+
+    <div class="card">
+      <h3>🎓 Certificates</h3>
+
+      <p id="certificateStatus">
+        Complete a course to earn a certificate.
+      </p>
+
+      <button
+        id="certificateButton"
+        onclick="openCertificate()">
+
+        View Certificate
+
+      </button>
+    </div>
+
+
+    <div class="card">
+      <h3>👤 My Profile</h3>
+      <p>View your personal information and progress.</p>
+
+      <a href="profile.html">
+        <button>View Profile</button>
+      </a>
+    </div>
+
+
+    <div class="card">
+      <h3>💰 Earnings</h3>
+
+      <p>
+        View your balance and earnings history.
+      </p>
+
+      <a href="earnings.html">
+        <button>View Earnings</button>
+      </a>
+
+    </div>
+
+
+    <button class="logout" onclick="logout()">
+      Log Out
+    </button>
+
+  </div>
+
+
+  <script>
+
+    const savedUser =
+      JSON.parse(localStorage.getItem("everlightUser"));
+
+    const loggedIn =
+      localStorage.getItem("everlightLoggedIn");
+
+
+    if (!savedUser || loggedIn !== "true") {
+
+      window.location.href = "login.html";
+
+    } else {
+
+      document.getElementById("welcomeMessage").textContent =
+        "Welcome, " + savedUser.name + " 👋";
+
+    }
+
+
+    const courseCompleted =
+      localStorage.getItem("webLesson2");
+
+
+    if (courseCompleted === "completed") {
+
+      document.getElementById("certificateStatus")
+        .textContent =
+        "🎉 Your Web Development certificate is ready!";
+
+    } else {
+
+      document.getElementById("certificateButton")
+        .classList.add("locked");
+
+    }
+
+
+    function openCertificate() {
+
+      if (courseCompleted === "completed") {
+
+        window.location.href =
+          "certificate.html";
+
+      } else {
+
+        alert(
+          "Complete the Web Development course first. 📚"
+        );
+
+      }
+
+    }
+
+
+    function logout() {
+
+      localStorage.removeItem("everlightLoggedIn");
+
+      window.location.href =
+        "login.html";
+
+    }
+
+  </script>
+
+</body>
+</html>

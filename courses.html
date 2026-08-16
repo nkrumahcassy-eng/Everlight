@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Courses</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      padding: 25px 20px;
+    }
+
+    .back {
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .course {
+      background: white;
+      padding: 22px;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .course h3 {
+      margin-top: 0;
+      font-size: 21px;
+    }
+
+    .course p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 10px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #111827;
+      width: 0%;
+    }
+
+    .course button {
+      width: 100%;
+      background: #111827;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Everlight</h1>
+    <p>Learn. Work. Earn.</p>
+  </header>
+
+  <div class="container">
+
+    <a class="back" href="dashboard.html">
+      ← Back to Dashboard
+    </a>
+
+    <h2>Explore Courses 📚</h2>
+
+    <p class="intro">
+      Learn valuable skills, track your progress,
+      build your portfolio and prepare for work.
+    </p>
+
+    <!-- Web Development -->
+
+    <div class="course">
+
+      <h3>💻 Web Development</h3>
+
+      <p>
+        Learn HTML, CSS and JavaScript
+        and start building websites.
+      </p>
+
+      <strong id="webProgressText">
+        50% Complete
+      </strong>
+
+      <div class="progress-container">
+        <div
+          class="progress-bar"
+          id="webProgressBar">
+        </div>
+      </div>
+
+      <a href="web-development.html">
+        <button>Continue Course</button>
+      </a>
+
+    </div>
+
+
+    <!-- Graphic Design -->
+
+    <div class="course">
+
+      <h3>🎨 Graphic Design</h3>
+
+      <p>
+        Learn how to create logos, posters
+        and social media designs.
+      </p>
+
+      <strong>0% Complete</strong>
+
+      <div class="progress-container">
+        <div
+          class="progress-bar"
+          style="width: 0%;">
+        </div>
+      </div>
+
+      <button onclick="comingSoon('Graphic Design')">
+        Start Course
+      </button>
+
+    </div>
+
+
+    <!-- Video Editing -->
+
+    <div class="course">
+
+      <h3>🎬 Video Editing</h3>
+
+      <p>
+        Learn how to edit videos for social
+        media and businesses.
+      </p>
+
+      <strong>0% Complete</strong>
+
+      <div class="progress-container">
+        <div
+          class="progress-bar"
+          style="width: 0%;">
+        </div>
+      </div>
+
+      <button onclick="comingSoon('Video Editing')">
+        Start Course
+      </button>
+
+    </div>
+
+
+    <!-- Voice Over -->
+
+    <div class="course">
+
+      <h3>🎙️ Voice Over</h3>
+
+      <p>
+        Learn recording, presentation
+        and professional voice-over skills.
+      </p>
+
+      <strong>0% Complete</strong>
+
+      <div class="progress-container">
+        <div
+          class="progress-bar"
+          style="width: 0%;">
+        </div>
+      </div>
+
+      <button onclick="comingSoon('Voice Over')">
+        Start Course
+      </button>
+
+    </div>
+
+
+    <!-- Digital Marketing -->
+
+    <div class="course">
+
+      <h3>📱 Digital Marketing</h3>
+
+      <p>
+        Learn how businesses attract customers
+        through the internet.
+      </p>
+
+      <strong>0% Complete</strong>
+
+      <div class="progress-container">
+        <div
+          class="progress-bar"
+          style="width: 0%;">
+        </div>
+      </div>
+
+      <button onclick="comingSoon('Digital Marketing')">
+        Start Course
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function updateWebProgress() {
+
+      const completed =
+        localStorage.getItem("webLesson1");
+
+      const bar =
+        document.getElementById("webProgressBar");
+
+      const text =
+        document.getElementById("webProgressText");
+
+      if (completed === "completed") {
+
+        bar.style.width = "50%";
+
+        text.textContent =
+          "50% Complete";
+
+      } else {
+
+        bar.style.width = "0%";
+
+        text.textContent =
+          "0% Complete";
+
+      }
+
+    }
+
+
+    function comingSoon(course) {
+
+      alert(
+        course +
+        " lessons are coming soon! 🚀"
+      );
+
+    }
+
+
+    updateWebProgress();
+
+  </script>
+
+</body>
+</html>

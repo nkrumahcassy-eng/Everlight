@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Certificate</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    .container {
+      padding: 25px 15px;
+    }
+
+    .certificate {
+      background: white;
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 45px 25px;
+      border: 6px double #111827;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .brand {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-family: Arial, sans-serif;
+      color: #666;
+    }
+
+    .certificate h1 {
+      font-size: 32px;
+      margin: 35px 0 20px;
+    }
+
+    .name {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .course {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .date {
+      color: #666;
+      margin-top: 30px;
+    }
+
+    .buttons {
+      max-width: 700px;
+      margin: 20px auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 15px;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      color: #111827;
+      font-family: Arial, sans-serif;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 500px) {
+      .certificate {
+        padding: 35px 15px;
+      }
+
+      .certificate h1 {
+        font-size: 26px;
+      }
+
+      .name {
+        font-size: 24px;
+      }
+
+      .course {
+        font-size: 20px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="certificate">
+
+      <div class="brand">
+        EVERLIGHT
+      </div>
+
+      <div class="subtitle">
+        Learn. Work. Earn.
+      </div>
+
+      <h1>
+        Certificate of Completion
+      </h1>
+
+      <p>
+        This certificate is proudly presented to
+      </p>
+
+      <div class="name" id="userName">
+        Learner
+      </div>
+
+      <p>
+        for successfully completing the course
+      </p>
+
+      <div class="course">
+        Web Development
+      </div>
+
+      <p>
+        covering HTML and CSS fundamentals.
+      </p>
+
+      <p class="date">
+        Completed on:
+        <span id="completionDate"></span>
+      </p>
+
+    </div>
+
+    <div class="buttons">
+
+      <button onclick="window.print()">
+        🖨️ Print Certificate
+      </button>
+
+      <button onclick="goToDashboard()">
+        🏠 Dashboard
+      </button>
+
+    </div>
+
+    <a class="back" href="courses.html">
+      ← Back to Courses
+    </a>
+
+  </div>
+
+  <script>
+
+    const savedUser =
+      JSON.parse(localStorage.getItem("everlightUser"));
+
+    const completed =
+      localStorage.getItem("webLesson2");
+
+    if (!savedUser) {
+
+      window.location.href = "login.html";
+
+    } else if (completed !== "completed") {
+
+      alert(
+        "Complete the Web Development course first."
+      );
+
+      window.location.href =
+        "web-development.html";
+
+    } else {
+
+      document.getElementById("userName")
+        .textContent = savedUser.name;
+
+      const today =
+        new Date().toLocaleDateString();
+
+      document.getElementById("completionDate")
+        .textContent = today;
+    }
+
+
+    function goToDashboard() {
+
+      window.location.href =
+        "dashboard.html";
+
+    }
+
+  </script>
+
+</body>
+</html>

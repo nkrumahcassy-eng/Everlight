@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Portfolio</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      padding: 25px 20px;
+    }
+
+    .back {
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .profile {
+      background: white;
+      padding: 22px;
+      margin-top: 25px;
+      border-radius: 14px;
+    }
+
+    .project {
+      background: white;
+      padding: 20px;
+      margin-top: 15px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .project h3 {
+      margin-top: 0;
+    }
+
+    .project p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .add-button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Everlight</h1>
+    <p>My Portfolio</p>
+  </header>
+
+  <div class="container">
+
+    <a class="back" href="dashboard.html">
+      ← Back to Dashboard
+    </a>
+
+    <div class="profile">
+
+      <h2 id="userName">My Portfolio</h2>
+
+      <p>
+        Show employers what you can do.
+        Add projects you've created while learning.
+      </p>
+
+    </div>
+
+    <h2>My Projects 🛠️</h2>
+
+    <div id="projects"></div>
+
+    <button class="add-button" onclick="addProject()">
+      + Add Project
+    </button>
+
+  </div>
+
+  <script>
+
+    const savedUser =
+      JSON.parse(localStorage.getItem("everlightUser"));
+
+    if (!savedUser) {
+
+      window.location.href = "login.html";
+
+    } else {
+
+      document.getElementById("userName").textContent =
+        savedUser.name + "'s Portfolio";
+    }
+
+
+    function showProjects() {
+
+      const projects =
+        JSON.parse(localStorage.getItem("everlightProjects")) || [];
+
+      const container =
+        document.getElementById("projects");
+
+      container.innerHTML = "";
+
+      if (projects.length === 0) {
+
+        container.innerHTML =
+          '<p class="empty">No projects yet. Start building! 🚀</p>';
+
+        return;
+      }
+
+      projects.forEach(function(project) {
+
+        const card =
+          document.createElement("div");
+
+        card.className = "project";
+
+        card.innerHTML = `
+          <h3>${project.title}</h3>
+          <p>${project.description}</p>
+          <strong>Skill: ${project.skill}</strong>
+        `;
+
+        container.appendChild(card);
+
+      });
+    }
+
+
+    function addProject() {
+
+      const title =
+        prompt("What is the name of your project?");
+
+      if (!title) return;
+
+      const description =
+        prompt("Describe your project:");
+
+      if (!description) return;
+
+      const skill =
+        prompt("What skill did you use?");
+
+      if (!skill) return;
+
+      const projects =
+        JSON.parse(localStorage.getItem("everlightProjects")) || [];
+
+      projects.push({
+        title: title,
+        description: description,
+        skill: skill
+      });
+
+      localStorage.setItem(
+        "everlightProjects",
+        JSON.stringify(projects)
+      );
+
+      showProjects();
+
+    }
+
+
+    showProjects();
+
+  </script>
+
+</body>
+</html>

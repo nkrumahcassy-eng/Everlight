@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Employer Dashboard</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      padding: 25px 20px;
+    }
+
+    .back {
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      margin-top: 18px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .applicant {
+      border-top: 1px solid #eee;
+      padding: 18px 0;
+    }
+
+    .applicant:first-child {
+      border-top: none;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 7px;
+      background: #eee;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 15px;
+      margin-top: 10px;
+    }
+
+    .reject {
+      background: #555;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 25px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Everlight</h1>
+    <p>Employer Dashboard</p>
+  </header>
+
+  <div class="container">
+
+    <a class="back" href="post-job.html">
+      ← Post Another Job
+    </a>
+
+    <h2>My Jobs 💼</h2>
+
+    <div id="jobs"></div>
+
+  </div>
+
+  <script>
+
+    function loadEmployerJobs() {
+
+      const jobs =
+        JSON.parse(
+          localStorage.getItem("everlightJobs")
+        ) || [];
+
+      const applications =
+        JSON.parse(
+          localStorage.getItem("applications")
+        ) || [];
+
+      const container =
+        document.getElementById("jobs");
+
+      container.innerHTML = "";
+
+      if (jobs.length === 0) {
+
+        container.innerHTML =
+          '<p class="empty">You have not posted any jobs yet.</p>';
+
+        return;
+      }
+
+      jobs.forEach(function(job) {
+
+        const jobApplications =
+          applications.filter(function(application) {
+
+            return application.jobId === job.id;
+
+          });
+
+        const card =
+          document.createElement("div");
+
+        card.className = "card";
+
+        let applicantsHTML = "";
+
+        if (jobApplications.length === 0) {
+
+          applicantsHTML =
+            '<p class="empty">No applications yet.</p>';
+
+        } else {
+
+          jobApplications.forEach(function(application) {
+
+            applicantsHTML += `
+
+              <div class="applicant">
+
+                <h4>👤 Applicant</h4>
+
+                <p>
+                  Applied for:
+                  <strong>${application.jobTitle}</strong>
+                </p>
+
+                <span class="status">
+                  ${application.status}
+                </span>
+
+                <button
+                  onclick="updateApplication(${application.id}, 'Accepted')">
+
+                  ✅ Accept Applicant
+
+                </button>
+
+                <button
+                  class="reject"
+                  onclick="updateApplication(${application.id}, 'Rejected')">
+
+                  ❌ Reject Applicant
+
+                </button>
+
+              </div>
+
+            `;
+
+          });
+
+        }
+
+        card.innerHTML = `
+
+          <h3>${job.title}</h3>
+
+          <p>
+            🏷️ ${job.category}
+          </p>
+
+          <p>
+            💰 GHS ${Number(job.payment).toFixed(2)}
+          </p>
+
+          <h3>
+            Applicants (${jobApplications.length})
+          </h3>
+
+          ${applicantsHTML}
+
+        `;
+
+        container.appendChild(card);
+
+      });
+
+    }
+
+
+    function updateApplication(
+      applicationId,
+      newStatus
+    ) {
+
+      const applications =
+        JSON.parse(
+          localStorage.getItem("applications")
+        ) || [];
+
+      const application =
+        applications.find(function(item) {
+
+          return item.id === applicationId;
+
+        });
+
+      if (!application) {
+
+        alert("Application not found.");
+
+        return;
+
+      }
+
+      application.status = newStatus;
+
+      localStorage.setItem(
+        "applications",
+        JSON.stringify(applications)
+      );
+
+      alert(
+        newStatus === "Accepted"
+          ? "🎉 Applicant accepted!"
+          : "Application rejected."
+      );
+
+      loadEmployerJobs();
+
+    }
+
+
+    loadEmployerJobs();
+
+  </script>
+
+</body>
+</html>

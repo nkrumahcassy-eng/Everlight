@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Everlight - Web Development</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header p {
+      color: #d1d5db;
+    }
+
+    .container {
+      padding: 25px 20px;
+    }
+
+    .back {
+      color: #111827;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 12px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    #progressBar {
+      width: 0%;
+      height: 100%;
+      background: #111827;
+      transition: width 0.5s;
+    }
+
+    .lesson {
+      background: white;
+      padding: 22px;
+      margin-top: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .lesson p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .example {
+      background: #f0f2f5;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+
+    .complete {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+
+    #lesson2 {
+      display: none;
+    }
+
+    #completionMessage {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Everlight</h1>
+    <p>Web Development</p>
+  </header>
+
+  <div class="container">
+
+    <a class="back" href="courses.html">
+      ← Back to Courses
+    </a>
+
+    <h2>Web Development Course 💻</h2>
+
+    <p><strong>Course Progress</strong></p>
+
+    <div class="progress-container">
+      <div id="progressBar"></div>
+    </div>
+
+    <p id="progressText">
+      0% Complete
+    </p>
+
+
+    <!-- LESSON 1 -->
+
+    <div class="lesson">
+
+      <h2>Lesson 1: What is HTML?</h2>
+
+      <p>
+        HTML stands for HyperText Markup Language.
+        It is used to create the structure of webpages.
+      </p>
+
+      <p>
+        HTML uses tags to tell the browser what
+        different parts of a webpage are.
+      </p>
+
+      <h3>Example</h3>
+
+      <div class="example">
+
+        <p>
+          &lt;h1&gt;My Website&lt;/h1&gt;
+        </p>
+
+        <p>
+          &lt;p&gt;Welcome to my website.&lt;/p&gt;
+        </p>
+
+      </div>
+
+      <p>
+        The &lt;h1&gt; tag creates a heading,
+        while the &lt;p&gt; tag creates a paragraph.
+      </p>
+
+      <button
+        class="complete"
+        onclick="completeLesson1()">
+
+        Complete Lesson 1 ✓
+
+      </button>
+
+    </div>
+
+
+    <!-- LESSON 2 -->
+
+    <div class="lesson" id="lesson2">
+
+      <h2>Lesson 2: What is CSS?</h2>
+
+      <p>
+        CSS stands for Cascading Style Sheets.
+      </p>
+
+      <p>
+        CSS controls how a webpage looks.
+        You can use CSS to change colors,
+        fonts, spacing, backgrounds and more.
+      </p>
+
+      <h3>Example</h3>
+
+      <div class="example">
+
+        <p>
+          color: blue;
+        </p>
+
+        <p>
+          font-size: 20px;
+        </p>
+
+      </div>
+
+      <p>
+        HTML gives a webpage its structure,
+        while CSS helps make that webpage
+        look attractive.
+      </p>
+
+      <button
+        class="complete"
+        onclick="completeLesson2()">
+
+        Complete Lesson 2 ✓
+
+      </button>
+
+    </div>
+
+
+    <p id="completionMessage"></p>
+
+  </div>
+
+
+  <script>
+
+    function updateProgress() {
+
+      const lesson1 =
+        localStorage.getItem("webLesson1");
+
+      const lesson2 =
+        localStorage.getItem("webLesson2");
+
+
+      if (lesson2 === "completed") {
+
+        document.getElementById("progressBar")
+          .style.width = "100%";
+
+        document.getElementById("progressText")
+          .textContent = "100% Complete 🎓";
+
+        document.getElementById("lesson2")
+          .style.display = "block";
+
+      }
+
+      else if (lesson1 === "completed") {
+
+        document.getElementById("progressBar")
+          .style.width = "50%";
+
+        document.getElementById("progressText")
+          .textContent = "50% Complete";
+
+        document.getElementById("lesson2")
+          .style.display = "block";
+
+      }
+
+      else {
+
+        document.getElementById("progressBar")
+          .style.width = "0%";
+
+        document.getElementById("progressText")
+          .textContent = "0% Complete";
+
+      }
+
+    }
+
+
+    function completeLesson1() {
+
+      localStorage.setItem(
+        "webLesson1",
+        "completed"
+      );
+
+      document.getElementById("completionMessage")
+        .textContent =
+        "🎉 Lesson 1 completed! Lesson 2 is now available.";
+
+      updateProgress();
+
+    }
+
+
+    function completeLesson2() {
+
+      localStorage.setItem(
+        "webLesson2",
+        "completed"
+      );
+
+      document.getElementById("completionMessage")
+        .textContent =
+        "🎓 Congratulations! You completed the Web Development course!";
+
+      updateProgress();
+
+    }
+
+
+    updateProgress();
+
+  </script>
+
+</body>
+</html>
